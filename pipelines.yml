@@ -1,12 +1,12 @@
 resources:
-  - name: myGitRepo
+  - name: myGitRep
     type: GitRepo
     configuration:
       gitProvider: my_github
       path: roja03/jfrog-pipelines-simple-example
       branches:
         include: master
-  - name: myBuildInfo
+  - name: myBuildInf
     type: BuildInfo
     configuration:
       sourceArtifactory: art
@@ -23,20 +23,20 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: myGitRepo
+            - name: myGitRep
           outputResources:
-            - name: myBuildInfo             
+            - name: myBuildInf             
         execution:
           onExecute:
             - echo $my_env_var
             - if [ -z $app_version ]; then add_pipeline_variables app_version=1.0.0; else app_version=$(bump_semver $app_version minor); fi
-            - write_output myBuildInfo "buildNumber=$app_version"
+            - write_output myBuildInf "buildNumber=$app_version"
             - add_run_variables run_var="hello"
       - name: step_2
         type: Bash
         configuration:
           inputResources:
-            - name: myBuildInfo            
+            - name: myBuildInf            
           runtime:
             type: image
             image:
@@ -46,7 +46,7 @@ pipelines:
         execution:
           onExecute:
             - echo $run_var  
-            - echo $res_myBuildInfo_buildNumber
+            - echo $res_myBuildInf_buildNumber
 
       - name: step_3
         type: Bash
