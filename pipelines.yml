@@ -13,7 +13,7 @@ resources:
       buildName: SampleApp
       buildNumber: 1          
 pipelines:  
-  - name: basic_pipeline
+  - name: basic_pipeline_roja
     configuration:
       environmentVariables:
         readOnly:
